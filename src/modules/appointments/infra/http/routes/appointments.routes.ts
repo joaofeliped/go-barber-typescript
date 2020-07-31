@@ -4,18 +4,11 @@ import AppointmentsController from '@modules/appointments/infra/controllers/Appo
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
-const appointmentsRoutes = Router();
+const appointmentsRouter = Router();
 const appointmentsController = new AppointmentsController();
 
-appointmentsRoutes.use(ensureAuthenticated);
+appointmentsRouter.use(ensureAuthenticated);
 
-// appointmentsRoutes.get('/', async (request, response) => {
-//   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
-//   const appointments = await appointmentsRepository.find();
+appointmentsRouter.post('/', appointmentsController.create);
 
-//   return response.json(appointments);
-// });
-
-appointmentsRoutes.post('/', appointmentsController.create);
-
-export default appointmentsRoutes;
+export default appointmentsRouter;
